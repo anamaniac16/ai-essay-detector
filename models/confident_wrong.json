@@ -1,0 +1,23 @@
+[
+  {
+    "index": 0,
+    "text_preview": "The role of literature in our society is to ensure that the public realm can be seen, heard, and understood by people without having to hide in the shadows, to understand, understand and share information, in order to build bridges and to facilitate social dialogue, at all levels, where the possibil...",
+    "true_label": "AI",
+    "predicted_label": "HUMAN",
+    "ai_probability": 0.44781415044937284,
+    "confidence": 0.05218584955062716,
+    "features": {
+      "essay_perplexity": 15.031473628508195,
+      "burstiness_std": 55.69471941408723,
+      "burstiness_cv": 1.268666042388124,
+      "avg_sentence_length": 20.333333333333332,
+      "sentence_length_std": 19.18332609325088,
+      "function_word_ratio": 0.4262295081967213,
+      "pos_bigram_entropy": 6.13361932654077,
+      "type_token_ratio": 0.5737704918032787,
+      "num_sentences": 9.0,
+      "avg_log_prob": -2.7101462447676354,
+      "log_prob_std": 1.7916590771638696
+    }
+  }
+]

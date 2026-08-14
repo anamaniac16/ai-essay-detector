@@ -1,0 +1,12 @@
+torch
+transformers
+streamlit
+scikit-learn
+xgboost
+pandas
+numpy
+nltk
+spacy
+tqdm
+joblib
+datasets

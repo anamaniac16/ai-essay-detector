@@ -1,0 +1,13 @@
+{
+  "log_prob_std": -1.3203878557688145,
+  "avg_log_prob": 1.0672049440453577,
+  "essay_perplexity": -0.7476924115813719,
+  "pos_bigram_entropy": -0.6053184601728073,
+  "sentence_length_std": -0.5501049415918318,
+  "num_sentences": -0.5318148650093266,
+  "type_token_ratio": 0.5289615425620868,
+  "burstiness_cv": -0.4151952359434871,
+  "function_word_ratio": -0.4100963336550068,
+  "avg_sentence_length": -0.36923496137309175,
+  "burstiness_std": -0.1355009665029929
+}
