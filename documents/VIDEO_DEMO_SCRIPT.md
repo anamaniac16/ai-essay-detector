@@ -2,78 +2,84 @@
 
 **Presenter**: Anamika Dutta  
 **Project**: AI Essay Detector (Project 2)  
-**Target Duration**: Under 2 Minutes (1:45 – 1:55)  
-**Format**: Fast-Paced Screencast Demo with Voiceover & Camera Overlay  
+**Target Duration**: Under 2 Minutes (1:30 – 1:45)  
+**Format**: 100% Pure App Screen Demo (Streamlit Interface Walkthrough)  
 **GitHub Repository**: [https://github.com/anamaniac16/ai-essay-detector](https://github.com/anamaniac16/ai-essay-detector)
 
 ---
 
-## Overview & Timing Flow (Total: 1:50)
+## Overview & Timing Flow (Total: 1:40)
 
-| Scene | Time | Focus | Visual / Screen Action |
+| Scene | Time | Focus | Visual / Screen Action (Streamlit UI Only) |
 |---|---|---|---|
-| **Scene 1** | 0:00 – 0:25 | **Hook & Problem Statement** | Camera ON / Streamlit Homepage Header |
-| **Scene 2** | 0:25 – 0:55 | **Architecture & Feature Engineering** | VS Code view of `detector/features.py` |
-| **Scene 3** | 0:55 – 1:30 | **Live Demo: Zero False-Positives & ESL Check** | Live Streamlit UI analyzing human essays & sentence inspector |
-| **Scene 4** | 1:30 – 1:50 | **Benchmark Results & Conclusion** | `EVALUATION.md` metrics table & GitHub repo link |
+| **Scene 1** | 0:00 – 0:25 | **Welcome & Problem Statement** | Main Streamlit App Header & Sensitivity Slider |
+| **Scene 2** | 0:25 – 1:00 | **Live Demo: Human Writing Protection** | Paste human essay -> Click "Analyze Essay" -> Show 3.1% Human result |
+| **Scene 3** | 1:00 – 1:25 | **Sentence-Level Evidence & Inspector** | Scroll to Grammarly-style highlights & expand sentence evidence details |
+| **Scene 4** | 1:25 – 1:40 | **ESL Bias Compensation & Wrap-Up** | Show ESL banner, 0% false-positive benchmark, & concluding call to action |
 
 ---
 
 ## Detailed Script & Scene Breakdown
 
-### Scene 1: Hook & Problem Statement (0:00 – 0:25)
+### Scene 1: Welcome & App Overview (0:00 – 0:25)
 
-**[VISUAL]**: Camera overlay in corner. Main screen displays Streamlit UI at `http://localhost:8502`.
+**[VISUAL]**: Screen recording of the live Streamlit web application running at `http://localhost:8502`. Hover mouse over the title **AI Essay Detector** and the sidebar slider.
 
 **[AUDIO / NARRATION]**:
-> "Hi everyone, I'm Anamika Dutta. 
+> "Hi everyone, I'm Anamika Dutta, and welcome to the live demo of my **AI Essay Detector**.
+>
+> Commercial detectors act as black boxes—frequently falsely accusing human writers, students, and non-native English speakers simply because their writing is clear. 
 > 
-> Commercial AI detectors act as black boxes—frequently falsely accusing human writers, non-native English speakers, and students simply because their writing is structured. 
-> 
-> To solve this, I built the **AI Essay Detector**—a transparent, statistical detection engine powered by a local GPT-2 model and custom feature engineering, calibrated to **eliminate false positives on human text**."
+> I built this statistical detector to provide 100% inspectable signals and strict guardrails calibrated to **eliminate false positives on human text**."
 
 ---
 
-### Scene 2: Architecture & Human-Voice Engineering (0:25 – 0:55)
+### Scene 2: Live Demo — Human Writing Protection (0:25 – 1:00)
 
-**[VISUAL]**: Switch screen to VS Code highlighting `detector/features.py` and `calibrate_model.py`.
+**[VISUAL]**: Paste a genuine human student essay into the text box. Click the gradient **Analyze Essay** button. Watch the spinner, then highlight the metric cards.
 
 **[AUDIO / NARRATION]**:
-> "Instead of chat-model guesses, our backend computes token-level log-probabilities using a local GPT-2 124M model. 
+> "Let's test a genuine human student essay. 
 > 
-> We extract 13 statistical features—including perplexity, sentence burstiness, POS-bigram entropy, and three explicit human protection signals: `first_person_pronoun_ratio` (*I, my, we*), `contraction_ratio` (*don't, it's*), and punctuation variety. 
+> I'll paste the text and click **Analyze Essay**. 
 > 
-> Domain sign constraints in `calibrate_model.py` ensure these human markers consistently **reduce** AI probability."
+> As you can see, the engine calculates an AI probability of **3.1%**, confidently classifying it as **Human-Written**. 
+> 
+> Whether you paste formal academic essays, short paragraphs, or personal reflections, our short-text uncertainty scaling and human-voice guardrails ensure human text remains safely classified as Human."
 
 ---
 
-### Scene 3: Live Demo — Zero False Positives & ESL Check (0:55 – 1:30)
+### Scene 3: Sentence-Level Evidence & Inspector (1:00 – 1:25)
 
-**[VISUAL]**: Return to Streamlit UI. Paste a human student essay, click **Analyze Essay**, then click a sentence to show Grammarly-style sentence evidence and the ESL banner.
+**[VISUAL]**: Scroll down to **Sentence-Level Analysis**. Hover over green highlighted sentences, then click a sentence to open the **Detailed Sentence Evidence** expander.
 
 **[AUDIO / NARRATION]**:
-> "Watch what happens when we paste a genuine human student essay. 
+> "Scrolling down to **Sentence-Level Analysis**, every sentence is highlighted using a Grammarly-style visual editor. 
 > 
-> The system calculates an AI probability of **3.1%**, confidently marking it **Human-Written**.
+> Guardrails ensure human text **never** triggers false red or orange 'Likely AI' highlights. 
 > 
-> When non-native English writing is entered, our independent **ESL Signal Detector** triggers an automatic bias discount so ESL writers aren't penalized. Plus, Grammarly-style sentence highlighting lets you inspect exact perplexities per sentence—with guardrails ensuring human text **never** displays false red or orange flags."
+> Clicking on any sentence opens the evidence inspector, revealing the exact perplexity, Z-score, and token log-probabilities driving the analysis."
 
 ---
 
-### Scene 4: Benchmark Results & Conclusion (1:30 – 1:50)
+### Scene 4: ESL Bias Compensation & Wrap-Up (1:25 – 1:40)
 
-**[VISUAL]**: Show `EVALUATION.md` metrics table, then transition to GitHub repository homepage.
+**[VISUAL]**: Paste an ESL essay to show the yellow **ESL Bias Compensated** warning banner, then point out the 0% false positive rate.
 
 **[AUDIO / NARRATION]**:
-> "On our held-out test benchmark, the system achieves **95.0% accuracy**, **100% precision for human protection**, and a **0% false positive rate** across 40+ human writing samples.
+> "When non-native English writing is entered, our independent ESL detector surfaces a dedicated warning banner and applies a bias discount to protect ESL students.
 > 
-> All code, dataset cards, and evaluation metrics are available on my GitHub repository. Thank you for watching!"
+> Across a benchmark of 40 diverse human samples, our model achieves a **0% false positive rate**. 
+> 
+> You can try the live app and check out the full code on my GitHub repository. Thank you!"
 
 ---
 
-## Delivery Checklist
+## Recording Instructions for Presenter
 
-- [x] **Strict Time Limit**: Keep speech pace crisp (~150 words/min) to complete under 1 minute 50 seconds.
-- [x] **Clipboard Prepped**: Have 1 human student essay pre-copied.
-- [x] **App Running**: Streamlit live at `http://localhost:8502`.
-- [x] **Commit Author**: Verified as `Anamika Dutta`.
+- [x] **Screen Capture**: Record browser window showing `http://localhost:8502` only.
+- [x] **No Code/IDE Switching**: Keep the entire recording inside the Streamlit web application.
+- [x] **Pre-copied Texts**:
+  1. Human Student Essay (for Scene 2 & 3)
+  2. ESL Writing Sample (for Scene 4)
+- [x] **Pace**: Crisp, energetic delivery completed in 1 minute 40 seconds.
