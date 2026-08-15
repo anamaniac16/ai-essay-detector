@@ -295,6 +295,41 @@ def type_token_ratio(text: str) -> float:
 
 
 # ---------------------------------------------------------------------------
+# Human Style Signals (Pronouns, Contractions, Punctuation Variety)
+# ---------------------------------------------------------------------------
+
+FIRST_PERSON_PRONOUNS = frozenset([
+    "i", "me", "my", "mine", "myself", "we", "us", "our", "ours", "ourselves"
+])
+
+
+def first_person_pronoun_ratio(text: str) -> float:
+    """Proportion of tokens that are first-person pronouns (strong human signal)."""
+    words = re.findall(r'\b[a-z]+\b', text.lower())
+    if not words:
+        return 0.0
+    return sum(1 for w in words if w in FIRST_PERSON_PRONOUNS) / len(words)
+
+
+def contraction_ratio(text: str) -> float:
+    """Proportion of words containing contractions (natural human voice signal)."""
+    words = text.lower().split()
+    if not words:
+        return 0.0
+    contractions = sum(1 for w in words if "'" in w or "’" in w or "n't" in w or "n’t" in w)
+    return contractions / len(words)
+
+
+def punctuation_variety_score(text: str) -> float:
+    """Ratio of expressive/varied punctuation (semicolons, dashes, quotes, parens, etc.)."""
+    words = text.split()
+    if not words:
+        return 0.0
+    varied_punc = len(re.findall(r'[;\-\–\—"\'\(\)\!\?]', text))
+    return min(1.0, varied_punc / len(words))
+
+
+# ---------------------------------------------------------------------------
 # Full feature vector extraction
 # ---------------------------------------------------------------------------
 
@@ -307,9 +342,11 @@ FEATURE_NAMES = [
     "function_word_ratio",
     "pos_bigram_entropy",
     "type_token_ratio",
-    "num_sentences",
     "avg_log_prob",
     "log_prob_std",
+    "first_person_pronoun_ratio",
+    "contraction_ratio",
+    "punctuation_variety",
 ]
 
 
@@ -335,24 +372,35 @@ def extract_features(text: str) -> Dict[str, float]:
 
     sent_lens = [len(s.split()) for s in sentences]
 
+    burst_std = float(np.std(sent_perps)) if len(sent_perps) >= 2 else 0.0
+    burst_cv = (
+        float(np.std(sent_perps) / np.mean(sent_perps))
+        if len(sent_perps) >= 2 and np.mean(sent_perps) > 1e-6
+        else 0.0
+    )
+    sent_len_std = float(np.std(sent_lens)) if len(sent_lens) >= 2 else 0.0
+
+    raw_entropy = pos_bigram_entropy(text)
+    raw_std_lp = float(np.std(lps))
+    raw_ttr = type_token_ratio(text)
+
     features = {
         "essay_perplexity": float(np.exp(-np.mean(lps))),
-        "burstiness_std": float(np.std(sent_perps)) if len(sent_perps) >= 2 else 0.0,
-        "burstiness_cv": (
-            float(np.std(sent_perps) / np.mean(sent_perps))
-            if len(sent_perps) >= 2 and np.mean(sent_perps) > 1e-6
-            else 0.0
-        ),
+        "burstiness_std": burst_std,
+        "burstiness_cv": burst_cv,
         "avg_sentence_length": float(np.mean(sent_lens)) if sent_lens else 0.0,
-        "sentence_length_std": float(np.std(sent_lens)) if len(sent_lens) >= 2 else 0.0,
+        "sentence_length_std": sent_len_std,
         "function_word_ratio": function_word_ratio(text),
-        "pos_bigram_entropy": pos_bigram_entropy(text),
-        "type_token_ratio": type_token_ratio(text),
-        "num_sentences": float(len(sentences)),
+        "pos_bigram_entropy": raw_entropy,
+        "type_token_ratio": raw_ttr,
         "avg_log_prob": float(np.mean(lps)),
-        "log_prob_std": float(np.std(lps)),
+        "log_prob_std": raw_std_lp,
+        "first_person_pronoun_ratio": first_person_pronoun_ratio(text),
+        "contraction_ratio": contraction_ratio(text),
+        "punctuation_variety": punctuation_variety_score(text),
     }
     return features
+
 
 
 def extract_sentence_features(text: str) -> List[Dict[str, float]]:

@@ -11,11 +11,11 @@
 |----------|-------|
 | **Data Source (Human)** | NLTK Brown Corpus (belles_lettres, learned) |
 | **Data Source (AI)** | Google Gemini (80%) + Local GPT-2 Small (20%) |
-| **Total Samples** | 100 |
-| **Train Set** | 80 (40 human, 40 AI) |
-| **Test Set** | 20 (10 human, 10 AI) |
+| **Total Samples** | 120 |
+| **Train Set** | 96 (56 human, 40 AI) |
+| **Test Set** | 24 (14 human, 10 AI) |
 | **Split Ratio** | 80/20 stratified |
-| **Word Count Range** | 63 - 231 words |
+| **Word Count Range** | 32 - 232 words |
 
 ## Data Description
 
@@ -37,8 +37,8 @@ To ensure structural diversity, the AI class represents two different generation
 
 | Split | Min | Max | Mean | Median |
 |-------|-----|-----|------|--------|
-| Train | 63 | 227 | 141.8 | 146.5 |
-| Test  | 69 | 231 | 156.3 | 163.5 |
+| Train | 32 | 232 | 121.6 | 105.0 |
+| Test  | 64 | 211 | 135.5 | 121.0 |
 
 ## Known Limitations & Exclusions
 

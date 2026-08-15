@@ -12,20 +12,20 @@
 
 | Metric | Value |
 |--------|-------|
-| **Accuracy** | 0.9500 (95.0%) |
+| **Accuracy** | 0.6250 (62.5%) |
 | **Precision** | 1.0000 (100.0%) |
-| **Recall** | 0.9000 (90.0%) |
-| **F1 Score** | 0.9474 (94.7%) |
+| **Recall** | 0.1000 (10.0%) |
+| **F1 Score** | 0.1818 (18.2%) |
 
 ### Confusion Matrix
 
 |  | Predicted Human | Predicted AI |
 |--|:---:|:---:|
-| **Actually Human** | 10 (TN) | 0 (FP) |
-| **Actually AI** | 1 (FN) | 9 (TP) |
+| **Actually Human** | 14 (TN) | 0 (FP) |
+| **Actually AI** | 9 (FN) | 1 (TP) |
 
 - **False Positive Rate**: 0.0% (human essays flagged as AI)
-- **False Negative Rate**: 10.0% (AI essays missed)
+- **False Negative Rate**: 90.0% (AI essays missed)
 
 ---
 
@@ -40,93 +40,99 @@ These are the 3 test-set essays that were either predicted incorrectly (wrong) o
 |----------|-------|
 | **True Label** | AI |
 | **Predicted Label** | HUMAN |
-| **AI Probability** | 0.4478 |
-| **Confidence** | 0.0522 |
+| **AI Probability** | 0.0010 |
+| **Confidence** | 0.4990 |
 
 **Text Preview:**
-> The role of literature in our society is to ensure that the public realm can be seen, heard, and understood by people without having to hide in the shadows, to understand, understand and share information, in order to build bridges and to facilitate social dialogue, at all levels, where the possibilities for sharing are not limited to one side of the room, but also everywhere. It is this process that is the cause of this new understanding of what it means to be a scholar. Laudance (1895) . "Homo...
+> Education is a crucial element in modern society because it helps us to be in touch with our own needs and needs. When we see people's needs in action, we're more likely to help them and that's the first step towards making our lives better. And that is where success really comes in. People are learning more about what works for them, and a lot more importantly about how they're doing it. That's why people have been working with us for a long time, but now we get to the stage where we can make d...
 
 **Key Features:**
 | Feature | Value |
 |---------|-------|
-| essay_perplexity | 15.0315 |
-| burstiness_std | 55.6947 |
-| burstiness_cv | 1.2687 |
-| avg_sentence_length | 20.3333 |
-| sentence_length_std | 19.1833 |
-| function_word_ratio | 0.4262 |
-| pos_bigram_entropy | 6.1336 |
-| type_token_ratio | 0.5738 |
-| num_sentences | 9.0000 |
-| avg_log_prob | -2.7101 |
-| log_prob_std | 1.7917 |
+| essay_perplexity | 11.1579 |
+| burstiness_std | 40.4361 |
+| burstiness_cv | 1.0884 |
+| avg_sentence_length | 12.8571 |
+| sentence_length_std | 8.3397 |
+| function_word_ratio | 0.2766 |
+| pos_bigram_entropy | 6.6505 |
+| type_token_ratio | 0.5585 |
+| avg_log_prob | -2.4121 |
+| log_prob_std | 1.7686 |
+| first_person_pronoun_ratio | 0.0638 |
+| contraction_ratio | 0.0556 |
+| punctuation_variety | 0.0778 |
 
 **Analysis / Theory:**
-High burstiness (CV=1.269) — this AI text has significant variation in sentence complexity, possibly because it was generated with high temperature or instructions to vary style.
+High burstiness (CV=1.088) — this AI text has significant variation in sentence complexity, possibly because it was generated with high temperature or instructions to vary style.
 
 ---
 
-### Borderline Correct #2 (Close Call - True Human)
-
-| Property | Value |
-|----------|-------|
-| **True Label** | HUMAN |
-| **Predicted Label** | HUMAN |
-| **AI Probability** | 0.0755 |
-| **Confidence** | 0.4245 |
-
-**Text Preview:**
-> It usually turned out well for him because either he liked the right people or there were only a few wrong people in the town. Alfred wanted to invest in my father's hotel and advance enough money to build a larger place. It was a very tempting offer. My father would have done it if it hadn't been for my mother, who had a fear of being in debt to anyone -- even Alfred Alpert. In spite of his being well liked there were a few people who were very careful about Alfred. They had my mother's opinion...
-
-**Key Features:**
-| Feature | Value |
-|---------|-------|
-| essay_perplexity | 28.3257 |
-| burstiness_std | 26.2678 |
-| burstiness_cv | 0.4909 |
-| avg_sentence_length | 18.4444 |
-| sentence_length_std | 9.8783 |
-| function_word_ratio | 0.3373 |
-| pos_bigram_entropy | 6.4937 |
-| type_token_ratio | 0.5740 |
-| num_sentences | 9.0000 |
-| avg_log_prob | -3.3438 |
-| log_prob_std | 2.7428 |
-
-**Analysis / Theory:**
-Borderline human because perplexity is relatively low (28.3), mimicking the predictable structure of AI text.
-
----
-
-### Borderline Correct #3 (Close Call - True AI)
+### Actual Misclassification #2 (False Negative)
 
 | Property | Value |
 |----------|-------|
 | **True Label** | AI |
-| **Predicted Label** | AI |
-| **AI Probability** | 0.9317 |
-| **Confidence** | 0.4317 |
+| **Predicted Label** | HUMAN |
+| **AI Probability** | 0.0432 |
+| **Confidence** | 0.4568 |
 
 **Text Preview:**
-> Climate change is a global issue that requires coordinated efforts to protect the human health and well-being of all people. "The challenge is to get an understanding of how the planet works, and understand the nature of the processes that take place in the ecosystem. And the best way to do that is by understanding how ecosystem conditions are changing, by studying the dynamics of changes in our ecological environment, the changing behavior of ecosystems and the change of biodiversity that drive...
+> Historical preservation is vital for future generations to understand how modern culture might evolve." The study found that "there was no indication that these children had any knowledge of or history of language, or of languages spoken by their parents or grandparents." Furthermore, "no knowledge was gained of the origin of each language or its language history." This suggests that their native language did not evolve in a systematic manner. . . . (N. B. & D. A. Green, The New Phrase Tree and ...
 
 **Key Features:**
 | Feature | Value |
 |---------|-------|
-| essay_perplexity | 10.8079 |
-| burstiness_std | 7.1601 |
-| burstiness_cv | 0.4080 |
-| avg_sentence_length | 26.2857 |
-| sentence_length_std | 8.9397 |
-| function_word_ratio | 0.3656 |
-| pos_bigram_entropy | 6.3931 |
-| type_token_ratio | 0.6237 |
-| num_sentences | 7.0000 |
-| avg_log_prob | -2.3803 |
-| log_prob_std | 1.7977 |
+| essay_perplexity | 14.4215 |
+| burstiness_std | 70.8242 |
+| burstiness_cv | 1.4136 |
+| avg_sentence_length | 11.3333 |
+| sentence_length_std | 17.9431 |
+| function_word_ratio | 0.2716 |
+| pos_bigram_entropy | 6.5456 |
+| type_token_ratio | 0.6173 |
+| avg_log_prob | -2.6687 |
+| log_prob_std | 1.9305 |
+| first_person_pronoun_ratio | 0.0062 |
+| contraction_ratio | 0.0000 |
+| punctuation_variety | 0.0765 |
 
 **Analysis / Theory:**
-Borderline AI because sentence-to-sentence variation (burstiness CV=0.408) is slightly higher than usual for AI text.
+High burstiness (CV=1.414) — this AI text has significant variation in sentence complexity, possibly because it was generated with high temperature or instructions to vary style.
+
+---
+
+### Actual Misclassification #3 (False Negative)
+
+| Property | Value |
+|----------|-------|
+| **True Label** | AI |
+| **Predicted Label** | HUMAN |
+| **AI Probability** | 0.0941 |
+| **Confidence** | 0.4059 |
+
+**Text Preview:**
+> The rapid development of technology has changed how we understand the world, and the opportunities that come with it. So it's not surprising that it has spurred the development and development for some of our most influential organizations," said David Pertwee, deputy director of the Center for Globalization. Pertmore said that the U.S. Chamber of Commerce has helped drive the economic growth of both the United States and China over the past 15 years. In contrast, China has seen the largest grow...
+
+**Key Features:**
+| Feature | Value |
+|---------|-------|
+| essay_perplexity | 11.3840 |
+| burstiness_std | 11.4842 |
+| burstiness_cv | 0.4827 |
+| avg_sentence_length | 19.7778 |
+| sentence_length_std | 7.3602 |
+| function_word_ratio | 0.3464 |
+| pos_bigram_entropy | 6.2468 |
+| type_token_ratio | 0.6089 |
+| avg_log_prob | -2.4322 |
+| log_prob_std | 2.1733 |
+| first_person_pronoun_ratio | 0.0223 |
+| contraction_ratio | 0.0112 |
+| punctuation_variety | 0.0281 |
+
+**Analysis / Theory:**
+This AI-generated text has statistical properties that closely mimic human writing. It may have been generated by a model or prompting strategy that specifically produces more 'natural' patterns.
 
 ---
 
@@ -143,15 +149,15 @@ writing with common grammatical patterns) through the detector.
 > essay corpus (e.g., from TOEFL or IELTS practice essays). This is explicitly
 > noted as a gap.
 
-⚠️ **WARNING: At least one ESL essay was falsely flagged as AI-generated.** This confirms the known bias risk — non-native English patterns can trigger false positives because lower perplexity and simpler structures overlap with AI-generated text features. The ESL signal module exists precisely to surface this risk to the user.
+✅ No ESL test essays were flagged as AI-generated. However, this test uses only 3 synthetic ESL samples, which is NOT sufficient to prove the absence of ESL bias. A production system would need to be validated against a real, diverse ESL essay corpus.
 
 
 #### esl_1: Simulated ESL essay — grammatically imperfect, limited vocabulary, simple sentence structure
 
 | Metric | Value |
 |--------|-------|
-| AI Probability | 0.9611 |
-| AI Prediction | 🔴 AI |
+| AI Probability | 0.0299 |
+| AI Prediction | 🟢 HUMAN |
 | ESL Flag Active | ⚠️ True |
 | ESL Score | 0.4000 |
 
@@ -162,8 +168,8 @@ writing with common grammatical patterns) through the detector.
 
 | Metric | Value |
 |--------|-------|
-| AI Probability | 0.9261 |
-| AI Prediction | 🔴 AI |
+| AI Probability | 0.0173 |
+| AI Prediction | 🟢 HUMAN |
 | ESL Flag Active | ✅ False |
 | ESL Score | 0.1000 |
 
@@ -174,8 +180,8 @@ writing with common grammatical patterns) through the detector.
 
 | Metric | Value |
 |--------|-------|
-| AI Probability | 0.9530 |
-| AI Prediction | 🔴 AI |
+| AI Probability | 0.0599 |
+| AI Prediction | 🟢 HUMAN |
 | ESL Flag Active | ✅ False |
 | ESL Score | 0.2500 |
 
