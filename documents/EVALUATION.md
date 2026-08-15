@@ -12,20 +12,20 @@
 
 | Metric | Value |
 |--------|-------|
-| **Accuracy** | 0.6250 (62.5%) |
+| **Accuracy** | 1.0000 (100.0%) |
 | **Precision** | 1.0000 (100.0%) |
-| **Recall** | 0.1000 (10.0%) |
-| **F1 Score** | 0.1818 (18.2%) |
+| **Recall** | 1.0000 (100.0%) |
+| **F1 Score** | 1.0000 (100.0%) |
 
 ### Confusion Matrix
 
 |  | Predicted Human | Predicted AI |
 |--|:---:|:---:|
 | **Actually Human** | 14 (TN) | 0 (FP) |
-| **Actually AI** | 9 (FN) | 1 (TP) |
+| **Actually AI** | 0 (FN) | 10 (TP) |
 
 - **False Positive Rate**: 0.0% (human essays flagged as AI)
-- **False Negative Rate**: 90.0% (AI essays missed)
+- **False Negative Rate**: 0.0% (AI essays missed)
 
 ---
 
@@ -34,105 +34,108 @@
 These are the 3 test-set essays that were either predicted incorrectly (wrong) or closest to the decision boundary (borderline correct close calls), highlighting the classifier's boundary behaviour.
 
 
-### Actual Misclassification #1 (False Negative)
+### Borderline Correct #1 (Close Call - True Human)
 
 | Property | Value |
 |----------|-------|
-| **True Label** | AI |
+| **True Label** | HUMAN |
 | **Predicted Label** | HUMAN |
-| **AI Probability** | 0.0010 |
-| **Confidence** | 0.4990 |
+| **AI Probability** | 0.1832 |
+| **Confidence** | 0.3168 |
 
 **Text Preview:**
-> Education is a crucial element in modern society because it helps us to be in touch with our own needs and needs. When we see people's needs in action, we're more likely to help them and that's the first step towards making our lives better. And that is where success really comes in. People are learning more about what works for them, and a lot more importantly about how they're doing it. That's why people have been working with us for a long time, but now we get to the stage where we can make d...
+> American democratic thought, pointed up the relation between the Protestant movement in this country and the development of a social religion, which he called the American Democratic Faith. Those familiar with his work will remember that he placed the incipience of the democratic faith at around 1850. And he describes it as a balanced polarity between the notions of the free individual and what he called the fundamental law. I want to say more about Gabriel's so-called fundamental law. But first...
 
 **Key Features:**
 | Feature | Value |
 |---------|-------|
-| essay_perplexity | 11.1579 |
-| burstiness_std | 40.4361 |
-| burstiness_cv | 1.0884 |
-| avg_sentence_length | 12.8571 |
-| sentence_length_std | 8.3397 |
-| function_word_ratio | 0.2766 |
-| pos_bigram_entropy | 6.6505 |
-| type_token_ratio | 0.5585 |
-| avg_log_prob | -2.4121 |
-| log_prob_std | 1.7686 |
-| first_person_pronoun_ratio | 0.0638 |
-| contraction_ratio | 0.0556 |
-| punctuation_variety | 0.0778 |
+| essay_perplexity | 32.5611 |
+| burstiness_std | 43.6232 |
+| burstiness_cv | 0.5439 |
+| avg_sentence_length | 20.0000 |
+| sentence_length_std | 5.9161 |
+| function_word_ratio | 0.3333 |
+| pos_bigram_entropy | 5.6360 |
+| type_token_ratio | 0.6167 |
+| avg_log_prob | -3.4831 |
+| log_prob_std | 3.0203 |
+| first_person_pronoun_ratio | 0.0167 |
+| contraction_ratio | 0.0083 |
+| punctuation_variety | 0.0167 |
+| ai_phrase_score | 0.0000 |
 
 **Analysis / Theory:**
-High burstiness (CV=1.088) — this AI text has significant variation in sentence complexity, possibly because it was generated with high temperature or instructions to vary style.
+Borderline human because perplexity is relatively low (32.6), mimicking the predictable structure of AI text.
 
 ---
 
-### Actual Misclassification #2 (False Negative)
+### Borderline Correct #2 (Close Call - True Human)
 
 | Property | Value |
 |----------|-------|
-| **True Label** | AI |
+| **True Label** | HUMAN |
 | **Predicted Label** | HUMAN |
-| **AI Probability** | 0.0432 |
-| **Confidence** | 0.4568 |
+| **AI Probability** | 0.1431 |
+| **Confidence** | 0.3569 |
 
 **Text Preview:**
-> Historical preservation is vital for future generations to understand how modern culture might evolve." The study found that "there was no indication that these children had any knowledge of or history of language, or of languages spoken by their parents or grandparents." Furthermore, "no knowledge was gained of the origin of each language or its language history." This suggests that their native language did not evolve in a systematic manner. . . . (N. B. & D. A. Green, The New Phrase Tree and ...
+> 6.4. The primary decomposition theorem We are trying to study a linear operator T on the finite-dimensional space V, by decomposing T into a direct sum of operators which are in some sense elementary. We can do this through the characteristic values and vectors of T in certain special cases, i.e., when the minimal polynomial for T factors over the scalar field F into a product of distinct monic polynomials of degree 1. What can we do with the general T?? If we try to study T using characteristic...
 
 **Key Features:**
 | Feature | Value |
 |---------|-------|
-| essay_perplexity | 14.4215 |
-| burstiness_std | 70.8242 |
-| burstiness_cv | 1.4136 |
-| avg_sentence_length | 11.3333 |
-| sentence_length_std | 17.9431 |
-| function_word_ratio | 0.2716 |
-| pos_bigram_entropy | 6.5456 |
-| type_token_ratio | 0.6173 |
-| avg_log_prob | -2.6687 |
-| log_prob_std | 1.9305 |
-| first_person_pronoun_ratio | 0.0062 |
+| essay_perplexity | 30.3166 |
+| burstiness_std | 125.3028 |
+| burstiness_cv | 0.9346 |
+| avg_sentence_length | 19.0000 |
+| sentence_length_std | 12.8297 |
+| function_word_ratio | 0.3676 |
+| pos_bigram_entropy | 6.0024 |
+| type_token_ratio | 0.5135 |
+| avg_log_prob | -3.4117 |
+| log_prob_std | 2.7933 |
+| first_person_pronoun_ratio | 0.0324 |
 | contraction_ratio | 0.0000 |
-| punctuation_variety | 0.0765 |
+| punctuation_variety | 0.0368 |
+| ai_phrase_score | 0.0000 |
 
 **Analysis / Theory:**
-High burstiness (CV=1.414) — this AI text has significant variation in sentence complexity, possibly because it was generated with high temperature or instructions to vary style.
+Borderline human because perplexity is relatively low (30.3), mimicking the predictable structure of AI text.
 
 ---
 
-### Actual Misclassification #3 (False Negative)
+### Borderline Correct #3 (Close Call - True Human)
 
 | Property | Value |
 |----------|-------|
-| **True Label** | AI |
+| **True Label** | HUMAN |
 | **Predicted Label** | HUMAN |
-| **AI Probability** | 0.0941 |
-| **Confidence** | 0.4059 |
+| **AI Probability** | 0.1334 |
+| **Confidence** | 0.3666 |
 
 **Text Preview:**
-> The rapid development of technology has changed how we understand the world, and the opportunities that come with it. So it's not surprising that it has spurred the development and development for some of our most influential organizations," said David Pertwee, deputy director of the Center for Globalization. Pertmore said that the U.S. Chamber of Commerce has helped drive the economic growth of both the United States and China over the past 15 years. In contrast, China has seen the largest grow...
+> Unfortunately, however, and for reasons to be discussed in the following chapter, no rate relationships can be made completely nondiscriminatory as long as all or some of the rates must be set above marginal costs in order to yield adequate revenues. And this fact may explain some of the disagreements among the experts as to the more rational formulas for the apportionment of total costs among different units of service. One such disagreement, which will receive attention in this next chapter, c...
 
 **Key Features:**
 | Feature | Value |
 |---------|-------|
-| essay_perplexity | 11.3840 |
-| burstiness_std | 11.4842 |
-| burstiness_cv | 0.4827 |
-| avg_sentence_length | 19.7778 |
-| sentence_length_std | 7.3602 |
-| function_word_ratio | 0.3464 |
-| pos_bigram_entropy | 6.2468 |
-| type_token_ratio | 0.6089 |
-| avg_log_prob | -2.4322 |
-| log_prob_std | 2.1733 |
-| first_person_pronoun_ratio | 0.0223 |
-| contraction_ratio | 0.0112 |
-| punctuation_variety | 0.0281 |
+| essay_perplexity | 30.2984 |
+| burstiness_std | 17.3672 |
+| burstiness_cv | 0.3408 |
+| avg_sentence_length | 29.3333 |
+| sentence_length_std | 9.3927 |
+| function_word_ratio | 0.3864 |
+| pos_bigram_entropy | 5.3267 |
+| type_token_ratio | 0.6932 |
+| avg_log_prob | -3.4111 |
+| log_prob_std | 2.7100 |
+| first_person_pronoun_ratio | 0.0000 |
+| contraction_ratio | 0.0000 |
+| punctuation_variety | 0.0000 |
+| ai_phrase_score | 0.0000 |
 
 **Analysis / Theory:**
-This AI-generated text has statistical properties that closely mimic human writing. It may have been generated by a model or prompting strategy that specifically produces more 'natural' patterns.
+Borderline human because perplexity is relatively low (30.3), mimicking the predictable structure of AI text. Borderline human because sentence-to-sentence variation (burstiness CV=0.341) is relatively low, making it look more uniform like AI writing.
 
 ---
 
@@ -149,15 +152,15 @@ writing with common grammatical patterns) through the detector.
 > essay corpus (e.g., from TOEFL or IELTS practice essays). This is explicitly
 > noted as a gap.
 
-✅ No ESL test essays were flagged as AI-generated. However, this test uses only 3 synthetic ESL samples, which is NOT sufficient to prove the absence of ESL bias. A production system would need to be validated against a real, diverse ESL essay corpus.
+⚠️ **WARNING: At least one ESL essay was falsely flagged as AI-generated.** This confirms the known bias risk — non-native English patterns can trigger false positives because lower perplexity and simpler structures overlap with AI-generated text features. The ESL signal module exists precisely to surface this risk to the user.
 
 
 #### esl_1: Simulated ESL essay — grammatically imperfect, limited vocabulary, simple sentence structure
 
 | Metric | Value |
 |--------|-------|
-| AI Probability | 0.0299 |
-| AI Prediction | 🟢 HUMAN |
+| AI Probability | 0.9419 |
+| AI Prediction | 🔴 AI |
 | ESL Flag Active | ⚠️ True |
 | ESL Score | 0.4000 |
 
@@ -168,8 +171,8 @@ writing with common grammatical patterns) through the detector.
 
 | Metric | Value |
 |--------|-------|
-| AI Probability | 0.0173 |
-| AI Prediction | 🟢 HUMAN |
+| AI Probability | 0.9580 |
+| AI Prediction | 🔴 AI |
 | ESL Flag Active | ✅ False |
 | ESL Score | 0.1000 |
 
@@ -180,8 +183,8 @@ writing with common grammatical patterns) through the detector.
 
 | Metric | Value |
 |--------|-------|
-| AI Probability | 0.0599 |
-| AI Prediction | 🟢 HUMAN |
+| AI Probability | 0.8659 |
+| AI Prediction | 🔴 AI |
 | ESL Flag Active | ✅ False |
 | ESL Score | 0.2500 |
 

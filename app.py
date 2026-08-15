@@ -412,6 +412,12 @@ def main():
                 esl_discount = min(0.50, esl["esl_score"] * 1.2)
                 ai_probability = max(0.05, ai_probability - esl_discount)
 
+            # Rule F: AI Formulaic Cliché & Transition Boost (detects ChatGPT style templates)
+            ai_p_score = essay_feats.get('ai_phrase_score', 0.0)
+            if ai_p_score > 0.3:
+                phrase_boost = min(0.85, ai_p_score * 0.20)
+                ai_probability = min(0.99, max(ai_probability, 0.70 + phrase_boost))
+
             # Rule C: First-person pronouns (I, me, my, we, our) indicate genuine human voice
             if essay_feats.get('first_person_pronoun_ratio', 0.0) > 0.015:
                 pronoun_discount = min(0.40, essay_feats['first_person_pronoun_ratio'] * 5.0)
@@ -422,20 +428,12 @@ def main():
                 contraction_discount = min(0.30, essay_feats['contraction_ratio'] * 4.0)
                 ai_probability = max(0.05, ai_probability - contraction_discount)
 
-            # Rule E: Short-text uncertainty attenuation (< 80 words)
+            # Rule E: Short-text uncertainty attenuation ONLY for non-AI texts (< 80 words)
             word_count = len(essay_text.split())
-            if word_count < 80 and ai_probability < 0.85:
-                # Scale probability toward lower/neutral values for short inputs
+            if word_count < 80 and ai_p_score <= 0.3 and ai_probability < 0.70:
                 ai_probability = ai_probability * (word_count / 80.0)
 
-            # Rule F: AI Formulaic Cliché & Transition Boost (detects ChatGPT style templates)
-            ai_p_score = essay_feats.get('ai_phrase_score', 0.0)
-            if ai_p_score > 0.5:
-                phrase_boost = min(0.70, ai_p_score * 0.15)
-                ai_probability = min(0.98, ai_probability + phrase_boost)
-
             prediction = "AI-Generated" if ai_probability >= threshold else "Human-Written"
-
 
 
             # ── 4. Per-sentence analysis ──
@@ -446,8 +444,9 @@ def main():
         st.markdown("---")
         st.markdown("## Analysis Results")
 
-        # Clamp low human scores to 0.0% for clean UI display
-        display_prob = 0.0 if ai_probability <= 0.08 else ai_probability
+        # Show exact calculated AI probability
+        display_prob = ai_probability
+
 
         # Metric cards
         col1, col2, col3, col4 = st.columns(4)
