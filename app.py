@@ -428,7 +428,14 @@ def main():
                 # Scale probability toward lower/neutral values for short inputs
                 ai_probability = ai_probability * (word_count / 80.0)
 
+            # Rule F: AI Formulaic Cliché & Transition Boost (detects ChatGPT style templates)
+            ai_p_score = essay_feats.get('ai_phrase_score', 0.0)
+            if ai_p_score > 0.5:
+                phrase_boost = min(0.70, ai_p_score * 0.15)
+                ai_probability = min(0.98, ai_probability + phrase_boost)
+
             prediction = "AI-Generated" if ai_probability >= threshold else "Human-Written"
+
 
 
             # ── 4. Per-sentence analysis ──

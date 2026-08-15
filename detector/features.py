@@ -330,6 +330,54 @@ def punctuation_variety_score(text: str) -> float:
 
 
 # ---------------------------------------------------------------------------
+# AI Formulaic Cliche & Transition Phrase Detection
+# ---------------------------------------------------------------------------
+
+AI_CLICHE_PATTERNS = [
+    r"\bin today'?s\b",
+    r"\bfast-paced\b",
+    r"\bdigital landscape\b",
+    r"\bdigital age\b",
+    r"\bcrucial role\b",
+    r"\bpivotal role\b",
+    r"\bvital role\b",
+    r"\bmore crucial than ever\b",
+    r"\bto address this challenge\b",
+    r"\bfurthermore\b",
+    r"\bmoreover\b",
+    r"\bin conclusion\b",
+    r"\bby implementing these\b",
+    r"\bwork-life balance\b",
+    r"\bdelve into\b",
+    r"\btestament to\b",
+    r"\bmultifaceted\b",
+    r"\bparamount importance\b",
+    r"\brealm of\b",
+    r"\btapestry of\b",
+    r"\bbeacon of\b",
+    r"\bfostering a sense of\b",
+    r"\bpaving the way\b",
+    r"\ba wide range of\b",
+    r"\bplays a key role\b",
+    r"\bcannot be overstated\b",
+    r"\bnavigating the complexities\b",
+    r"\bshaping the future\b",
+    r"\balign with\b",
+    r"\bharnessing the power\b",
+]
+
+
+def ai_phrase_score(text: str) -> float:
+    """Density of AI formulaic transitions & cliché phrases per 100 words (AI indicator)."""
+    words = text.split()
+    if not words:
+        return 0.0
+    text_lower = text.lower()
+    matches = sum(len(re.findall(pat, text_lower)) for pat in AI_CLICHE_PATTERNS)
+    return (matches / len(words)) * 100.0
+
+
+# ---------------------------------------------------------------------------
 # Full feature vector extraction
 # ---------------------------------------------------------------------------
 
@@ -347,6 +395,7 @@ FEATURE_NAMES = [
     "first_person_pronoun_ratio",
     "contraction_ratio",
     "punctuation_variety",
+    "ai_phrase_score",
 ]
 
 
@@ -398,8 +447,10 @@ def extract_features(text: str) -> Dict[str, float]:
         "first_person_pronoun_ratio": first_person_pronoun_ratio(text),
         "contraction_ratio": contraction_ratio(text),
         "punctuation_variety": punctuation_variety_score(text),
+        "ai_phrase_score": ai_phrase_score(text),
     }
     return features
+
 
 
 

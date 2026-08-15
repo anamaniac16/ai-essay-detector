@@ -32,19 +32,24 @@ pipeline.fit(X_train, y_train)
 
 coefs = pipeline.named_steps["classifier"].coef_[0]
 
-# Set strong negative coefficients for human style signals
+# Set domain coefficients: Human markers negative, AI markers positive
 for i, f in enumerate(SELECTED_FEATURES):
     if f in ["first_person_pronoun_ratio", "contraction_ratio", "punctuation_variety"]:
         coefs[i] = min(coefs[i], -0.70)
-    elif f in ["type_token_ratio", "burstiness_cv", "burstiness_std", "log_prob_std", "pos_bigram_entropy", "sentence_length_std", "essay_perplexity"]:
-        coefs[i] = min(coefs[i], -0.40)
+    elif f in ["burstiness_cv", "burstiness_std", "log_prob_std", "pos_bigram_entropy", "sentence_length_std", "essay_perplexity"]:
+        coefs[i] = min(coefs[i], -0.30)
+    elif f == "type_token_ratio":
+        coefs[i] = -0.05  # Keep TTR neutral so short AI texts aren't shielded
+    elif f == "ai_phrase_score":
+        coefs[i] = max(coefs[i], 0.85)  # Strong positive weight for AI cliché transitions
     elif f == "avg_log_prob":
-        coefs[i] = min(coefs[i], 0.15)
+        coefs[i] = max(coefs[i], 0.35)
 
 pipeline.named_steps["classifier"].coef_[0] = coefs
 
-# Shift intercept to protect formal human text (high bar for AI classification)
-pipeline.named_steps["classifier"].intercept_[0] -= 2.6
+# Downward shift of intercept to protect human-authored text
+pipeline.named_steps["classifier"].intercept_[0] -= 1.5
+
 
 
 os.makedirs("models", exist_ok=True)
